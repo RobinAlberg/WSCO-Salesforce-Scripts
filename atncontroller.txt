@@ -1,0 +1,29 @@
+<apex:page controller="atnController">
+ <apex:form >
+        <!-- actionFunction is for calling controller's method -->
+        <apex:actionFunction action="{!doQuery}" name="apexDoQuery" reRender="myData"/>
+        
+        <!-- Filter Section -->
+        <div style="padding: 10px">
+            <label>Filter by Session:&nbsp;<apex:inputText value="{!searchString}" onKeyup="apexDoQuery()"/></label>
+        </div>
+        
+        <!-- my Page Block -->
+        <apex:pageBlock title="Attendance" id="myData">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+            </apex:pageBlockButtons>
+            <apex:pageblockTable value="{!atn}" var="attendance"> <!-- con in myContactList -->
+                 <apex:column headerValue="Member" >
+                    <apex:inputField value="{!attendance.Member_name__c}"/>
+                </apex:column>
+                <apex:column headerValue="Present" >
+                    <apex:inputField value="{!attendance.Present__c}"/>
+                </apex:column> 
+                <apex:column headerValue="Excused Absence" >
+                    <apex:inputField value="{!attendance.Excused_Absence__c}"/>
+                </apex:column>     
+            </apex:pageblockTable>
+        </apex:pageBlock>
+    </apex:form>     
+</apex:page>

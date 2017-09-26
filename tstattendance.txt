@@ -1,0 +1,11 @@
+@isTest
+public class TestAttendance {
+static testMethod void testMethod1()
+    		{  
+		Program__c pro = new Program__c(name='Test Program');
+		insert pro;
+		Session__c ses = new Session__c();
+        	ses.program__c=pro.Id;
+        	insert ses;
+    }
+}

@@ -1,0 +1,113 @@
+public class fnaController 
+{
+    public List<Folder_Number__c> FolderNumbers {get;set;}
+    public fnaController() {
+        FolderNumbers = [select Name, Member_name__c, Program_Name__c, Instrument__c from account];
+    }
+}
+
+public class fnaController {
+
+    public ApexPages.StandardController controller; 
+
+
+    Public Folder_Number__c fn = new Folder_Number__c();
+    public Folder_Number__c getfn()
+    {
+        return fn;
+    }
+
+    public String TheFolder {get;set;}
+    Public String TheMember {get; set;}  
+
+
+    public fnaController(ApexPages.StandardController Controller)
+    {
+        fn = (Folder_Number__c)Controller.getRecord(); 
+        this.controller=Controller;  
+    } 
+    public PageReference save() {
+      insert fn; 
+      return null;
+    }    
+}
+<apex:page Controller="fnaController" >
+  <!-- Page Header -->
+  <apex:sectionHeader title="Folder Assignments"/>
+
+  <!-- Begin Form -->
+  <apex:form >
+    <apex:pageBlock mode="edit"> 
+
+      <apex:pageBlockSection columns="4" showHeader="true" title="Information"> 
+        <apex:inputField value="{!FolderNumber.Member_name__c" required="true" />
+        <apex:inputField value="{{!FolderNumber.Program_Name__c}"  required="true" />  
+	<apex:inputField value="{{!FolderNumber.Instrument__c}"  required="true" /> 
+	<apex:inputField value="{{!FolderNumber.Name}"  required="true" />  
+      </apex:pageBlockSection>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>
+
+<apex:page controller="fnaController">
+<apex:pageBlock title="Folder Assignments">
+      <apex:pageBlockTable value="{!FolderNumbers}" var="FolderNumber">
+          <apex:column value="{!FolderNumber.Member_name__c}"/>
+          <apex:column value="{!FolderNumber.Program_Name__c}"/>
+          <apex:column value="{!FolderNumber.Instrument__c}"/>
+          <apex:column value="{!FolderNumber.Name}"/>
+      </apex:pageBlockTable>
+  </apex:pageBlock>
+</apex:page>
+
+
+
+
+<apex:page controller="fnaController">
+<apex:form >
+     <apex:pageBlock title="Folder Assignments">
+          <apex:pageBlockTable value="{!FolderNumbers}" var="FolderNumber">
+              <apex:column headerValue="Member Name">
+                  <apex:inputField value="{!FolderNumber.Member_name__c}"/>
+              </apex:column>    
+              <apex:column headerValue="Program">    
+                  <apex:inputField value="{!FolderNumber.Program_Name__c}"/>
+              </apex:column>   
+              <apex:column headerValue="Instrument">        
+                  <apex:inputField /> value="{!FolderNumber.Instrument__c}"/>
+               </apex:column>   
+              <apex:column headerValue="Folder Number">        
+                  <apex:inputField value="{!FolderNumber.Name}"/>
+              </apex:column>       
+          </apex:pageBlockTable>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>
+
+
+
+
+Public class fnaController{ 
+public ApexPages.StandardController controller; 
+Public Account acc{get; set;} 
+Public Automobile__c auto{get; set;} 
+Public String aName {get; set;} 
+Public String aManufactureNamec {get; set;} 
+Public String aLName {get; set;} 
+Public String aStreet {get; set;} 
+Public String aEdu {get; set;} 
+public VolunteerRegisterContr(ApexPages.StandardController Controller) 
+	{ auto=(Automobile__c)Controller.getRecord(); this.controller=Controller; } 
+	public VolunteerRegisterContr(){} 
+	public PageReference Save() 
+{ insert auto; return null; } }
+
+
+
+
+ToB:
+https://drive.google.com/file/d/0BwP1TQawNRHbNXlqV0FySGxiMVU/view?usp=sharing
+Aderans
+http://sftp.aderansusa.com/netftp/index.php
+
+- This item is not eligible for coupons or additional discounts

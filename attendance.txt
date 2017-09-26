@@ -1,0 +1,27 @@
+trigger CreateAttendances on Session__c (after insert) {
+Set<Id> programIds = new Set<Id>();
+List<Enrollment__c> enrolledMembers = new List<Enrollment__c>();
+List<Attendance__c> att = new List<Attendance__c>();
+
+// create Set of Program IDs we want to query
+for (Session__c sessionInLoop : Trigger.new) {
+programIds.add(sessionInLoop.Program__c);
+}
+
+// query ALL the relevant Enrolled Members at once
+// make sure you're querying all the fields you'll need to create your
+// attendance records - do you need Enrolled_Mamber__c and/or Member_name__c?
+enrolledMembers = [SELECT Id, Enrolled_Member__c, Enrolled_Program__c, Instrument__c FROM Enrollment__c
+WHERE Enrolled_Program__c IN :programIds];
+
+for (Session__c sessionInLoop : Trigger.new) {
+    for (Enrollment__c e : enrolledMembers) {
+        att.add (new Attendance__c(
+           Session_name__c=sessionInLoop.Id,
+           Member_name__c=e.Enrolled_Member__c,
+           Instrument__c=e.Instrument__c)); 
+}
+}
+
+insert att;
+}
